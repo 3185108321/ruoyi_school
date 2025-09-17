@@ -1,0 +1,5 @@
+com\ruoyi\paper\service\impl\PaperServiceImpl.class
+com\ruoyi\paper\controller\PaperController.class
+com\ruoyi\paper\domain\Paper.class
+com\ruoyi\paper\mapper\PaperMapper.class
+com\ruoyi\paper\service\IPaperService.class

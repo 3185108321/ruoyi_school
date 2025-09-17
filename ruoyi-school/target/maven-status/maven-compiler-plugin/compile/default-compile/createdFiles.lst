@@ -1,0 +1,5 @@
+com\ruoyi\student\service\impl\StudentServiceImpl.class
+com\ruoyi\student\controller\StudentController.class
+com\ruoyi\student\domain\Student.class
+com\ruoyi\student\mapper\StudentMapper.class
+com\ruoyi\student\service\IStudentService.class
