@@ -1,0 +1,5 @@
+com\ruoyi\course\service\ICourseService.class
+com\ruoyi\course\service\impl\CourseServiceImpl.class
+com\ruoyi\course\domain\Course.class
+com\ruoyi\course\controller\CourseController.class
+com\ruoyi\course\mapper\CourseMapper.class

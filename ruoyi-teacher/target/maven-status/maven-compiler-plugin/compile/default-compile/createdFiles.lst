@@ -1,0 +1,5 @@
+com\ruoyi\teacher\mapper\TeacherMapper.class
+com\ruoyi\teacher\service\impl\TeacherServiceImpl.class
+com\ruoyi\teacher\controller\TeacherController.class
+com\ruoyi\teacher\service\ITeacherService.class
+com\ruoyi\teacher\domain\Teacher.class

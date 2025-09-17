@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.paper.mapper.StudentMapper">
+    
+    <resultMap type="Student" id="StudentResult">
+        <result property="studentId"    column="student_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="major"    column="major"    />
+        <result property="grade"    column="grade"    />
+        <result property="className"    column="class_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectStudentVo">
+        select student_id, user_id, major, grade, class_name, create_time, update_time from biz_student
+    </sql>
+
+    <select id="selectStudentList" parameterType="Student" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="className != null  and className != ''"> and class_name like concat('%', #{className}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectStudentByStudentId" parameterType="Long" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        where student_id = #{studentId}
+    </select>
+
+    <insert id="insertStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="studentId">
+        insert into biz_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="major != null">major,</if>
+            <if test="grade != null">grade,</if>
+            <if test="className != null">class_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="major != null">#{major},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="className != null">#{className},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        update biz_student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="className != null">class_name = #{className},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where student_id = #{studentId}
+    </update>
+
+    <delete id="deleteStudentByStudentId" parameterType="Long">
+        delete from biz_student where student_id = #{studentId}
+    </delete>
+
+    <delete id="deleteStudentByStudentIds" parameterType="String">
+        delete from biz_student where student_id in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>
